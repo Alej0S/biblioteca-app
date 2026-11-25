@@ -90,9 +90,10 @@ a { color: var(--acento); }
 /* ── Formularios ──────────────────────────────── */
 .formulario { display: grid; gap: 1rem; }
 .formulario-fila { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
-.campo { display: grid; gap: 0.3rem; font-weight: 500; }
+.campo { display: grid; gap: 0.3rem; font-weight: 500; align-content: start; }
 .campo input, .campo select, .filtros input, .filtros select, .selector-estado {
   font: inherit;
+  font-weight: 400;
   padding: 0.5rem 0.65rem;
   border: 1px solid var(--borde);
   border-radius: 8px;

@@ -5,6 +5,8 @@ import Inicio from './pages/Inicio';
 import Login from './pages/Login';
 import Registro from './pages/Registro';
 import Libros from './pages/Libros';
+import NuevoLibro from './pages/NuevoLibro';
+import DetalleLibro from './pages/DetalleLibro';
 import Autores from './pages/Autores';
 import NoEncontrada from './pages/NoEncontrada';
 
@@ -19,6 +21,8 @@ export default function App() {
 
         {/* Protegidas: sin sesión redirigen a /login */}
         <Route path="/libros" element={<RutaProtegida><Libros /></RutaProtegida>} />
+        <Route path="/libros/nuevo" element={<RutaProtegida><NuevoLibro /></RutaProtegida>} />
+        <Route path="/libros/:id" element={<RutaProtegida><DetalleLibro /></RutaProtegida>} />
         <Route path="/autores" element={<RutaProtegida><Autores /></RutaProtegida>} />
 
         <Route path="*" element={<NoEncontrada />} />
