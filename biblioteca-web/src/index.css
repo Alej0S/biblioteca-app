@@ -1,0 +1,156 @@
+/* Biblioteca personal — estilos globales (simples, sin librerías) */
+
+:root {
+  --papel: #f7f3ea;
+  --tarjeta: #ffffff;
+  --tinta: #2b2620;
+  --tinta-suave: #6b6258;
+  --borde: #e2d9c8;
+  --acento: #2f5d50;
+  --acento-oscuro: #234740;
+  --peligro: #b3261e;
+  --leido: #2e7d32;
+  --pendiente: #a86b00;
+  --prestado: #3949ab;
+  --radio: 10px;
+
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+  color: var(--tinta);
+  background: var(--papel);
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+h1, h2, h3 { line-height: 1.2; margin: 0 0 0.75rem; }
+a { color: var(--acento); }
+
+/* ── Barra superior ───────────────────────────── */
+.barra {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 0.75rem 1.5rem;
+  background: var(--acento);
+  color: #fff;
+}
+.barra h1 { font-size: 1.25rem; margin: 0; }
+.barra nav, .barra .sesion { display: flex; align-items: center; gap: 1rem; }
+.barra .sesion { margin-left: auto; }
+.barra a { color: #e8f0ec; text-decoration: none; padding: 0.25rem 0; border-bottom: 2px solid transparent; }
+.barra a.active { color: #fff; border-bottom-color: #fff; }
+.barra .usuario { font-size: 0.9rem; opacity: 0.9; }
+
+/* ── Contenido ────────────────────────────────── */
+.contenedor { max-width: 960px; margin: 2rem auto; padding: 0 1rem; }
+
+.tarjeta {
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.tarjeta-angosta { max-width: 420px; margin-inline: auto; }
+
+.encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.encabezado h2 { margin: 0; }
+
+.acciones { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+
+/* ── Botones ──────────────────────────────────── */
+.boton {
+  display: inline-block;
+  border: none;
+  border-radius: 8px;
+  padding: 0.55rem 1.1rem;
+  background: var(--acento);
+  color: #fff;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.boton:hover { background: var(--acento-oscuro); }
+.boton:disabled { opacity: 0.6; cursor: not-allowed; }
+.boton-secundario { background: transparent; color: var(--acento); border: 1px solid currentColor; }
+.barra .boton-secundario { color: #fff; }
+.boton-secundario:hover { background: rgba(47, 93, 80, 0.08); }
+.boton-peligro { background: transparent; color: var(--peligro); border: 1px solid currentColor; }
+.boton-peligro:hover { background: rgba(179, 38, 30, 0.08); }
+.boton-chico { padding: 0.3rem 0.7rem; font-size: 0.9rem; }
+
+/* ── Formularios ──────────────────────────────── */
+.formulario { display: grid; gap: 1rem; }
+.formulario-fila { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+.campo { display: grid; gap: 0.3rem; font-weight: 500; }
+.campo input, .campo select, .filtros input, .filtros select, .selector-estado {
+  font: inherit;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  background: #fff;
+  color: inherit;
+}
+.campo input:focus, .campo select:focus, .filtros input:focus, .filtros select:focus {
+  outline: 2px solid var(--acento);
+  outline-offset: 1px;
+}
+.campo-invalido input, .campo-invalido select { border-color: var(--peligro); }
+.error-campo { color: var(--peligro); font-size: 0.85rem; font-weight: 400; }
+.error {
+  color: var(--peligro);
+  background: #fdecea;
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  margin: 0;
+}
+.aviso { background: #fff8e1; border-radius: 8px; padding: 0.75rem 1rem; }
+
+/* ── Filtros ──────────────────────────────────── */
+.filtros { display: grid; gap: 0.75rem; grid-template-columns: 2fr 1fr 1fr; margin-bottom: 1rem; }
+@media (max-width: 640px) { .filtros { grid-template-columns: 1fr; } }
+
+/* ── Listas ───────────────────────────────────── */
+.lista { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.5rem; }
+.item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background: #fffdf8;
+}
+.item-principal { flex: 1 1 240px; min-width: 0; }
+.item-titulo { font-weight: 600; text-decoration: none; color: var(--tinta); }
+.item-titulo:hover { text-decoration: underline; }
+.item-detalle { color: var(--tinta-suave); font-size: 0.9rem; }
+
+.estado-carga, .vacio { color: var(--tinta-suave); text-align: center; padding: 1.5rem; }
+
+/* ── Insignias de estado ──────────────────────── */
+.insignia {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+}
+.insignia-leido { color: var(--leido); background: #e8f5e9; }
+.insignia-pendiente { color: var(--pendiente); background: #fff4e0; }
+.insignia-prestado { color: var(--prestado); background: #e8eaf6; }
+
+/* ── Resumen (Inicio) ─────────────────────────── */
+.resumen { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin: 1rem 0; }
+.resumen-dato { border: 1px solid var(--borde); border-radius: var(--radio); padding: 1rem; text-align: center; background: #fffdf8; }
+.resumen-numero { display: block; font-size: 2rem; font-weight: 700; }
