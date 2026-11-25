@@ -64,34 +64,59 @@ export default function FormularioLibro({ inicial, autores, alGuardar }) {
   return (
     <form onSubmit={manejarEnvio} className="formulario" noValidate>
       <label className={`campo ${errores.titulo ? 'campo-invalido' : ''}`}>
-        Título
-        <input ref={refs.titulo} name="titulo" value={datos.titulo} onChange={manejarCambio} maxLength={200} />
+        <span className="campo-etiqueta">Título</span>
+        <input
+          ref={refs.titulo}
+          name="titulo"
+          value={datos.titulo}
+          onChange={manejarCambio}
+          maxLength={200}
+          placeholder="Ej. Ficciones"
+        />
         {errores.titulo && <span className="error-campo">{errores.titulo}</span>}
       </label>
 
       <div className="formulario-fila">
         <label className={`campo ${errores.autor_id ? 'campo-invalido' : ''}`}>
-          Autor
-          <select ref={refs.autor_id} name="autor_id" value={datos.autor_id} onChange={manejarCambio}>
+          <span className="campo-etiqueta">Autor</span>
+          <select
+            ref={refs.autor_id}
+            name="autor_id"
+            value={datos.autor_id}
+            onChange={manejarCambio}
+          >
             <option value="">Elegí un autor…</option>
             {autores.map((a) => (
-              <option key={a.id} value={a.id}>{a.nombre}</option>
+              <option key={a.id} value={a.id}>
+                {a.nombre}
+              </option>
             ))}
           </select>
           {errores.autor_id && <span className="error-campo">{errores.autor_id}</span>}
         </label>
 
         <label className={`campo ${errores.anio ? 'campo-invalido' : ''}`}>
-          Año
-          <input ref={refs.anio} type="text" inputMode="numeric" name="anio" value={datos.anio} onChange={manejarCambio} placeholder="Opcional" maxLength={4} />
+          <span className="campo-etiqueta">Año</span>
+          <input
+            ref={refs.anio}
+            type="text"
+            inputMode="numeric"
+            name="anio"
+            value={datos.anio}
+            onChange={manejarCambio}
+            placeholder="Opcional"
+            maxLength={4}
+          />
           {errores.anio && <span className="error-campo">{errores.anio}</span>}
         </label>
 
         <label className="campo">
-          Estado
+          <span className="campo-etiqueta">Estado</span>
           <select name="estado" value={datos.estado} onChange={manejarCambio}>
             {ESTADOS.map((e) => (
-              <option key={e.valor} value={e.valor}>{e.texto}</option>
+              <option key={e.valor} value={e.valor}>
+                {e.texto}
+              </option>
             ))}
           </select>
         </label>
@@ -100,7 +125,9 @@ export default function FormularioLibro({ inicial, autores, alGuardar }) {
       {errorServidor && <p className="error">{errorServidor}</p>}
 
       <div className="acciones">
-        <button className="boton" disabled={enviando}>{enviando ? 'Guardando…' : 'Guardar'}</button>
+        <button className="boton" disabled={enviando}>
+          {enviando ? 'Guardando…' : 'Guardar libro'}
+        </button>
       </div>
     </form>
   );

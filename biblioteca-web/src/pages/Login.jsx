@@ -38,25 +38,49 @@ export default function Login() {
   }
 
   return (
-    <section className="tarjeta tarjeta-angosta">
-      <h2>Ingresar</h2>
-      <form onSubmit={manejarEnvio} className="formulario" noValidate>
-        <label className="campo">
-          Email
-          <input type="email" name="email" value={datos.email} onChange={manejarCambio} autoComplete="email" />
-        </label>
-        <label className="campo">
-          Contraseña
-          <input type="password" name="password" value={datos.password} onChange={manejarCambio} autoComplete="current-password" />
-        </label>
+    <section className="contenedor contenedor-angosto">
+      <div className="tarjeta">
+        <div className="encabezado-texto" style={{ marginBottom: '28px' }}>
+          <h1 className="display-xl">Ingresar</h1>
+          <span className="body-sm">Accedé a tu biblioteca personal.</span>
+        </div>
 
-        {error && <p className="error">{error}</p>}
+        <form onSubmit={manejarEnvio} className="formulario" noValidate>
+          <label className="campo">
+            <span className="campo-etiqueta">Email</span>
+            <input
+              type="email"
+              name="email"
+              value={datos.email}
+              onChange={manejarCambio}
+              autoComplete="email"
+              placeholder="nombre@ejemplo.com"
+            />
+          </label>
 
-        <button className="boton" disabled={enviando}>
-          {enviando ? 'Ingresando…' : 'Ingresar'}
-        </button>
-      </form>
-      <p>¿No tenés cuenta? <Link to="/registro">Creá una</Link></p>
+          <label className="campo">
+            <span className="campo-etiqueta">Contraseña</span>
+            <input
+              type="password"
+              name="password"
+              value={datos.password}
+              onChange={manejarCambio}
+              autoComplete="current-password"
+              placeholder="Tu contraseña"
+            />
+          </label>
+
+          {error && <p className="error">{error}</p>}
+
+          <button className="boton boton-ancho" disabled={enviando}>
+            {enviando ? 'Ingresando…' : 'Ingresar'}
+          </button>
+        </form>
+
+        <p className="pie-formulario">
+          ¿No tenés cuenta? <Link to="/registro">Creá una</Link>
+        </p>
+      </div>
     </section>
   );
 }

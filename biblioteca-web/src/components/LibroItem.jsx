@@ -27,21 +27,34 @@ export default function LibroItem({ libro, alCambiarEstado, alBorrar }) {
   return (
     <li className="item">
       <div className="item-principal">
-        <Link className="item-titulo" to={`/libros/${libro.id}`}>{libro.titulo}</Link>
+        <Link className="item-titulo" to={`/libros/${libro.id}`}>
+          {libro.titulo}
+        </Link>
         <div className="item-detalle">
           {libro.autor_nombre}
           {libro.anio !== null && ` · ${libro.anio}`}
         </div>
         {error && <p className="error-campo">{error}</p>}
       </div>
+
       <Insignia estado={libro.estado} />
+
       <div className="acciones">
-        <select className="selector-estado" aria-label="Cambiar estado" value={libro.estado} onChange={cambiar}>
+        <select
+          className="selector-estado"
+          aria-label={`Cambiar estado de ${libro.titulo}`}
+          value={libro.estado}
+          onChange={cambiar}
+        >
           {ESTADOS.map((e) => (
-            <option key={e.valor} value={e.valor}>{e.texto}</option>
+            <option key={e.valor} value={e.valor}>
+              {e.texto}
+            </option>
           ))}
         </select>
-        <button className="boton boton-peligro boton-chico" onClick={borrar}>Borrar</button>
+        <button type="button" className="boton boton-peligro boton-chico" onClick={borrar}>
+          Borrar
+        </button>
       </div>
     </li>
   );

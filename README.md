@@ -11,11 +11,11 @@ Aplicación web full-stack para registrar tus **libros** y **autores**, y llevar
 
 ## Requisitos previos
 
-| Herramienta | Versión | Para qué |
-|---|---|---|
-| [Node.js](https://nodejs.org/) | 22 LTS (o ≥ 20.19) | Correr la API y el cliente |
-| MySQL o MariaDB | MySQL 8 / MariaDB 10.4+ (por ejemplo, el de [XAMPP](https://www.apachefriends.org/)) | Base de datos |
-| Git | cualquiera | Clonar el repositorio |
+| Herramienta                   | Versión                                                                            | Para qué                  |
+| ----------------------------- | ----------------------------------------------------------------------------------- | -------------------------- |
+| [Node.js](https://nodejs.org/) | 22 LTS (o ≥ 20.19)                                                                 | Correr la API y el cliente |
+| MySQL o MariaDB               | MySQL 8 / MariaDB 10.4+ (por ejemplo, el de [XAMPP](https://www.apachefriends.org/)) | Base de datos              |
+| Git                           | cualquiera                                                                          | Clonar el repositorio      |
 
 ## Instalación
 
@@ -73,21 +73,21 @@ cp .env.example .env
 
 ### `biblioteca-api/.env`
 
-| Variable | Ejemplo | Descripción |
-|---|---|---|
-| `PORT` | `3000` | Puerto donde escucha la API |
-| `FRONTEND_URL` | `http://localhost:5173` | Origen del cliente; CORS solo acepta pedidos de esta URL |
-| `DB_HOST` | `localhost` | Servidor MySQL |
-| `DB_PORT` | `3306` | Puerto MySQL |
-| `DB_USER` | `biblioteca_app` | Usuario MySQL (lo crea `schema.sql`) |
-| `DB_PASSWORD` | `una-clave-segura` | Clave de ese usuario (la misma de `schema.sql`) |
-| `DB_NAME` | `biblioteca` | Nombre de la base |
-| `JWT_SECRET` | *(texto largo y aleatorio)* | Clave para firmar los tokens. Generar una con: `node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"` |
+| Variable         | Ejemplo                       | Descripción                                                                                                                |
+| ---------------- | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `PORT`         | `3000`                      | Puerto donde escucha la API                                                                                                 |
+| `FRONTEND_URL` | `http://localhost:5173`     | Origen del cliente; CORS solo acepta pedidos de esta URL                                                                    |
+| `DB_HOST`      | `localhost`                 | Servidor MySQL                                                                                                              |
+| `DB_PORT`      | `3306`                      | Puerto MySQL                                                                                                                |
+| `DB_USER`      | `biblioteca_app`            | Usuario MySQL (lo crea `schema.sql`)                                                                                      |
+| `DB_PASSWORD`  | `una-clave-segura`          | Clave de ese usuario (la misma de `schema.sql`)                                                                           |
+| `DB_NAME`      | `biblioteca`                | Nombre de la base                                                                                                           |
+| `JWT_SECRET`   | *(texto largo y aleatorio)* | Clave para firmar los tokens. Generar una con: `node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"` |
 
 ### `biblioteca-web/.env`
 
-| Variable | Ejemplo | Descripción |
-|---|---|---|
+| Variable         | Ejemplo                       | Descripción                                                              |
+| ---------------- | ----------------------------- | ------------------------------------------------------------------------- |
 | `VITE_API_URL` | `http://localhost:3000/api` | URL base de la API. Vite solo expone variables que empiezan con `VITE_` |
 
 ## Ejecutar
@@ -108,11 +108,11 @@ Abrir **http://localhost:5173**, ingresar con el usuario demo o crear una cuenta
 
 ### Otros scripts
 
-| Carpeta | Comando | Qué hace |
-|---|---|---|
-| `biblioteca-api` | `npm start` | Corre la API sin recarga automática |
+| Carpeta            | Comando           | Qué hace                                  |
+| ------------------ | ----------------- | ------------------------------------------ |
+| `biblioteca-api` | `npm start`     | Corre la API sin recarga automática       |
 | `biblioteca-web` | `npm run build` | Genera la versión optimizada en `dist/` |
-| `biblioteca-web` | `npm run lint` | Revisa el código con oxlint |
+| `biblioteca-web` | `npm run lint`  | Revisa el código con oxlint               |
 
 ## Estructura
 
@@ -139,12 +139,12 @@ biblioteca-app/
 
 ## Problemas comunes
 
-| Síntoma | Causa probable | Solución |
-|---|---|---|
-| `No se pudo conectar a MySQL: connect ECONNREFUSED` | MySQL apagado | Encender MySQL (en XAMPP: *Start* en MySQL) |
-| `Access denied for user 'biblioteca_app'` | No se corrió `schema.sql` o la clave del `.env` no coincide | Correr el script; revisar `DB_PASSWORD` |
-| `EADDRINUSE :::3000` | Otra API ya usa el puerto | Cerrar la otra terminal o cambiar `PORT` |
-| Error de CORS en la consola del navegador | `FRONTEND_URL` no coincide con la URL del cliente | Poner exactamente `http://localhost:5173` |
-| `VITE_API_URL` es `undefined` / los pedidos van a `/undefined/...` | Falta `biblioteca-web/.env` o no se reinició Vite | Crear el `.env` y reiniciar `npm run dev` |
-| Me manda a "Ingresar" de golpe | El token venció (dura 2 h) | Volver a iniciar sesión |
-| Un libro que existe responde 404 | Es de otro usuario: por seguridad, la API responde "no encontrado" | Ingresar con el usuario dueño |
+| Síntoma                                                                 | Causa probable                                                     | Solución                                     |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------ | --------------------------------------------- |
+| `No se pudo conectar a MySQL: connect ECONNREFUSED`                    | MySQL apagado                                                      | Encender MySQL (en XAMPP: *Start* en MySQL) |
+| `Access denied for user 'biblioteca_app'`                              | No se corrió `schema.sql` o la clave del `.env` no coincide   | Correr el script; revisar `DB_PASSWORD`     |
+| `EADDRINUSE :::3000`                                                   | Otra API ya usa el puerto                                          | Cerrar la otra terminal o cambiar `PORT`    |
+| Error de CORS en la consola del navegador                                | `FRONTEND_URL` no coincide con la URL del cliente                | Poner exactamente `http://localhost:5173`   |
+| `VITE_API_URL` es `undefined` / los pedidos van a `/undefined/...` | Falta `biblioteca-web/.env` o no se reinició Vite               | Crear el `.env` y reiniciar `npm run dev` |
+| Me manda a "Ingresar" de golpe                                           | El token venció (dura 2 h)                                        | Volver a iniciar sesión                      |
+| Un libro que existe responde 404                                         | Es de otro usuario: por seguridad, la API responde "no encontrado" | Ingresar con el usuario dueño                |

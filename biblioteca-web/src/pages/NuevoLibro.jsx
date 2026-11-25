@@ -13,22 +13,43 @@ export default function NuevoLibro() {
   }
 
   return (
-    <section className="tarjeta">
-      <div className="encabezado">
-        <h2>Nuevo libro</h2>
-        <Link to="/libros">← Volver</Link>
+    <section className="contenedor contenedor-formulario">
+      <Link className="enlace-volver" to="/libros">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path
+            d="M10 3.5L5.5 8L10 12.5"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+        Volver a libros
+      </Link>
+
+      <div className="encabezado-pagina">
+        <div className="encabezado-texto">
+          <h1 className="display-xl">Nuevo libro</h1>
+          <span className="body-sm">Sumá un nuevo título a tu catálogo personal.</span>
+        </div>
       </div>
 
       {cargando && <p className="estado-carga">Cargando autores…</p>}
       {error && <p className="error">{error}</p>}
+
       {!cargando && !error && autores.length === 0 && (
         <div className="aviso">
           <p>Primero cargá un autor para poder agregar libros.</p>
-          <Link className="boton" to="/autores">Ir a autores</Link>
+          <Link className="boton" to="/autores">
+            Ir a autores
+          </Link>
         </div>
       )}
+
       {!cargando && !error && autores.length > 0 && (
-        <FormularioLibro autores={autores} alGuardar={guardar} />
+        <div className="tarjeta">
+          <FormularioLibro autores={autores} alGuardar={guardar} />
+        </div>
       )}
     </section>
   );
