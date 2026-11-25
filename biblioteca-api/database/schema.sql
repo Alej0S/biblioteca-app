@@ -6,6 +6,10 @@
 -- ATENCIÓN: borra y vuelve a crear las tablas. Se pierden los datos.
 -- =====================================================================
 
+-- Este archivo está en UTF-8: así los acentos de los datos de ejemplo se
+-- guardan bien aunque el cliente mysql use otro juego de caracteres
+SET NAMES utf8mb4;
+
 CREATE DATABASE IF NOT EXISTS biblioteca
   CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

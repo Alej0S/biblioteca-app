@@ -10,9 +10,9 @@ function validar({ titulo, autor_id, anio }) {
   if (!titulo.trim()) errores.titulo = 'El título es obligatorio';
   else if (titulo.trim().length > 200) errores.titulo = 'Máximo 200 caracteres';
   if (!autor_id) errores.autor_id = 'Elegí un autor';
-  if (anio !== '') {
+  if (anio.trim() !== '') {
     const numero = Number(anio);
-    if (!Number.isInteger(numero) || numero < 0 || numero > ANIO_ACTUAL) {
+    if (!/^\d+$/.test(anio.trim()) || numero > ANIO_ACTUAL) {
       errores.anio = `El año debe estar entre 0 y ${ANIO_ACTUAL}`;
     }
   }
@@ -55,7 +55,7 @@ export default function FormularioLibro({ inicial, autores, alGuardar }) {
       await alGuardar({
         titulo: datos.titulo.trim(),
         autor_id: Number(datos.autor_id),
-        anio: datos.anio === '' ? null : Number(datos.anio), // año vacío viaja como null
+        anio: datos.anio.trim() === '' ? null : Number(datos.anio), // año vacío viaja como null
         estado: datos.estado,
       });
     } catch (err) {
@@ -86,7 +86,9 @@ export default function FormularioLibro({ inicial, autores, alGuardar }) {
 
         <label className={`campo ${errores.anio ? 'campo-invalido' : ''}`}>
           Año
-          <input ref={refs.anio} type="number" name="anio" value={datos.anio} onChange={manejarCambio} placeholder="Opcional" />
+          {/* type="text" + inputMode numérico: con type="number" un valor a medio
+              escribir ("19e") llega como "" y el libro se guardaría sin año */}
+          <input ref={refs.anio} type="text" inputMode="numeric" name="anio" value={datos.anio} onChange={manejarCambio} placeholder="Opcional" maxLength={4} />
           {errores.anio && <span className="error-campo">{errores.anio}</span>}
         </label>
 

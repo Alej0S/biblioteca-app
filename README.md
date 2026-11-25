@@ -38,17 +38,19 @@ El script `biblioteca-api/database/schema.sql` crea **todo**: la base `bibliotec
 
 > ⚠️ Borra y vuelve a crear las tablas: si ya tenías datos, se pierden.
 
-**Opción A: terminal** (desde la carpeta `biblioteca-api`):
+**Opción A: terminal** (desde la carpeta `biblioteca-api`). Funciona igual en PowerShell, cmd y bash:
 
 ```bash
-mysql -u root -p < database/schema.sql
+mysql -u root -p -e "source database/schema.sql"
 ```
 
-Con XAMPP en Windows (root sin contraseña):
+Con XAMPP en Windows (root sin contraseña, `mysql` no está en el PATH):
 
-```bash
-C:\xampp\mysql\bin\mysql.exe -u root < database\schema.sql
+```powershell
+C:\xampp\mysql\bin\mysql.exe -u root -e "source database/schema.sql"
 ```
+
+> En cmd o bash también sirve `mysql -u root -p < database/schema.sql`. En **PowerShell no**: ahí el `<` no redirige archivos.
 
 **Opción B: phpMyAdmin.** Abrir `http://localhost/phpmyadmin` → pestaña **Importar** → elegir `database/schema.sql` → **Continuar**.
 

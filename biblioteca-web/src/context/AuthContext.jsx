@@ -1,15 +1,17 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import * as authService from '../services/auth';
-import { guardarToken, borrarToken } from '../services/api';
+import { guardarToken, borrarToken, obtenerToken } from '../services/api';
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   // Se lee localStorage al crear el estado (de forma síncrona): al recargar la
   // página la sesión ya está disponible antes de que RutaProtegida decida.
+  // Hay sesión solo si están el token y el usuario (si otra pestaña cerró la
+  // sesión, el token ya no está)
   const [usuario, setUsuario] = useState(() => {
     const guardado = localStorage.getItem('usuario');
-    return guardado ? JSON.parse(guardado) : null;
+    return guardado && obtenerToken() ? JSON.parse(guardado) : null;
   });
 
   function abrirSesion({ token, usuario: datos }) {
