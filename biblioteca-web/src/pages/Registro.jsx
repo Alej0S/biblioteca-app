@@ -45,32 +45,64 @@ export default function Registro() {
   }
 
   return (
-    <section className="tarjeta tarjeta-angosta">
-      <h2>Crear cuenta</h2>
-      <form onSubmit={manejarEnvio} className="formulario" noValidate>
-        <label className="campo">
-          Email
-          <input type="email" name="email" value={datos.email} onChange={manejarCambio} autoComplete="email" />
-          {errores.email && <span className="error-campo">{errores.email}</span>}
-        </label>
-        <label className="campo">
-          Contraseña
-          <input type="password" name="password" value={datos.password} onChange={manejarCambio} autoComplete="new-password" />
-          {errores.password && <span className="error-campo">{errores.password}</span>}
-        </label>
-        <label className="campo">
-          Repetir contraseña
-          <input type="password" name="confirmar" value={datos.confirmar} onChange={manejarCambio} autoComplete="new-password" />
-          {errores.confirmar && <span className="error-campo">{errores.confirmar}</span>}
-        </label>
+    <section className="contenedor contenedor-angosto">
+      <div className="tarjeta">
+        <div className="encabezado-texto" style={{ marginBottom: '28px' }}>
+          <h1 className="display-xl">Crear cuenta</h1>
+          <span className="body-sm">Empezá a registrar tus lecturas hoy.</span>
+        </div>
 
-        {error && <p className="error">{error}</p>}
+        <form onSubmit={manejarEnvio} className="formulario" noValidate>
+          <label className={`campo ${errores.email ? 'campo-invalido' : ''}`}>
+            <span className="campo-etiqueta">Email</span>
+            <input
+              type="email"
+              name="email"
+              value={datos.email}
+              onChange={manejarCambio}
+              autoComplete="email"
+              placeholder="nombre@ejemplo.com"
+            />
+            {errores.email && <span className="error-campo">{errores.email}</span>}
+          </label>
 
-        <button className="boton" disabled={enviando}>
-          {enviando ? 'Creando…' : 'Crear cuenta'}
-        </button>
-      </form>
-      <p>¿Ya tenés cuenta? <Link to="/login">Ingresá</Link></p>
+          <label className={`campo ${errores.password ? 'campo-invalido' : ''}`}>
+            <span className="campo-etiqueta">Contraseña</span>
+            <input
+              type="password"
+              name="password"
+              value={datos.password}
+              onChange={manejarCambio}
+              autoComplete="new-password"
+              placeholder="Mínimo 6 caracteres"
+            />
+            {errores.password && <span className="error-campo">{errores.password}</span>}
+          </label>
+
+          <label className={`campo ${errores.confirmar ? 'campo-invalido' : ''}`}>
+            <span className="campo-etiqueta">Repetir contraseña</span>
+            <input
+              type="password"
+              name="confirmar"
+              value={datos.confirmar}
+              onChange={manejarCambio}
+              autoComplete="new-password"
+              placeholder="Repetí tu contraseña"
+            />
+            {errores.confirmar && <span className="error-campo">{errores.confirmar}</span>}
+          </label>
+
+          {error && <p className="error">{error}</p>}
+
+          <button className="boton boton-ancho" disabled={enviando}>
+            {enviando ? 'Creando…' : 'Crear cuenta'}
+          </button>
+        </form>
+
+        <p className="pie-formulario">
+          ¿Ya tenés cuenta? <Link to="/login">Ingresá</Link>
+        </p>
+      </div>
     </section>
   );
 }

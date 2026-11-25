@@ -34,16 +34,33 @@ export default function DetalleLibro() {
   }
 
   return (
-    <section className="tarjeta">
-      <div className="encabezado">
-        <h2>Editar libro</h2>
-        <Link to="/libros">← Volver</Link>
+    <section className="contenedor contenedor-formulario">
+      <Link className="enlace-volver" to="/libros">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path
+            d="M10 3.5L5.5 8L10 12.5"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+        Volver a libros
+      </Link>
+
+      <div className="encabezado-pagina">
+        <div className="encabezado-texto">
+          <h1 className="display-xl">Editar libro</h1>
+          {libro && <span className="body-sm">{libro.titulo}</span>}
+        </div>
       </div>
 
       {(cargando || cargandoAutores) && <p className="estado-carga">Cargando…</p>}
       {error && <p className="error">{error}</p>}
       {!cargando && !cargandoAutores && libro && (
-        <FormularioLibro inicial={libro} autores={autores} alGuardar={guardar} />
+        <div className="tarjeta">
+          <FormularioLibro inicial={libro} autores={autores} alGuardar={guardar} />
+        </div>
       )}
     </section>
   );

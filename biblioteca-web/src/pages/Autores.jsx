@@ -23,51 +23,74 @@ export default function Autores() {
   }
 
   return (
-    <>
-      <section className="tarjeta">
-        <h2>Autores</h2>
+    <section className="contenedor">
+      <div className="encabezado-pagina">
+        <div className="encabezado-texto">
+          <h1 className="display-xl">Autores</h1>
+          {!cargando && !error && (
+            <span className="body-sm tabular">
+              {autores.length} {autores.length === 1 ? 'autor registrado' : 'autores registrados'}
+            </span>
+          )}
+        </div>
+      </div>
+
+      <div className="tarjeta tarjeta-superficie">
+        <h2 className="tarjeta-titulo">Nuevo autor</h2>
         <FormularioAutor alGuardar={crear} textoBoton="Agregar autor" className="nuevo-autor" />
-      </section>
+      </div>
 
-      <section className="tarjeta">
-        {errorBorrado && <p className="error">{errorBorrado}</p>}
+      {errorBorrado && <p className="error" style={{ marginBottom: '24px' }}>{errorBorrado}</p>}
 
-        {cargando && <p className="estado-carga">Cargando autores…</p>}
-        {error && <p className="error">No se pudieron cargar los autores: {error}</p>}
-        {!cargando && !error && autores.length === 0 && (
-          <p className="vacio">Todavía no cargaste autores.</p>
-        )}
+      {cargando && <p className="estado-carga">Cargando autores…</p>}
+      {error && <p className="error">No se pudieron cargar los autores: {error}</p>}
+      {!cargando && !error && autores.length === 0 && (
+        <div className="vacio">
+          <p>Todavía no cargaste autores.</p>
+        </div>
+      )}
 
-        {!cargando && !error && autores.length > 0 && (
-          <ul className="lista">
-            {autores.map((autor) =>
-              editandoId === autor.id ? (
-                <li key={autor.id} className="item">
-                  <FormularioAutor
-                    inicial={autor}
-                    alGuardar={(datos) => guardarEdicion(autor.id, datos)}
-                    alCancelar={() => setEditandoId(null)}
-                  />
-                </li>
-              ) : (
-                <li key={autor.id} className="item">
-                  <div className="item-principal">
-                    <strong>{autor.nombre}</strong>
-                    <div className="item-detalle">
-                      {autor.nacionalidad ?? 'Sin nacionalidad'} · {autor.cantidad_libros}{' '}
-                      {Number(autor.cantidad_libros) === 1 ? 'libro' : 'libros'}
-                    </div>
+      {!cargando && !error && autores.length > 0 && (
+        <ul className="lista">
+          {autores.map((autor) =>
+            editandoId === autor.id ? (
+              <li key={autor.id} className="item item-editando">
+                <FormularioAutor
+                  inicial={autor}
+                  alGuardar={(datos) => guardarEdicion(autor.id, datos)}
+                  alCancelar={() => setEditandoId(null)}
+                />
+              </li>
+            ) : (
+              <li key={autor.id} className="item">
+                <div className="item-principal">
+                  <span className="item-titulo">{autor.nombre}</span>
+                  <div className="item-detalle">
+                    {autor.nacionalidad ?? 'Sin nacionalidad'} · {autor.cantidad_libros}{' '}
+                    {Number(autor.cantidad_libros) === 1 ? 'libro' : 'libros'}
                   </div>
-                  <div className="acciones">
-                    <button className="boton boton-secundario boton-chico" onClick={() => setEditandoId(autor.id)}>Editar</button>
-                    <button className="boton boton-peligro boton-chico" onClick={() => borrar(autor)}>Borrar</button>
-                  </div>
-                </li>
-              )
-            )}
-          </ul>
-        )}
-      </section>
-    </>
+                </div>
+                <div className="acciones">
+                  <button
+                    type="button"
+                    className="boton boton-secundario boton-chico"
+                    onClick={() => setEditandoId(autor.id)}
+                  >
+                    Editar
+                  </button>
+                  <button
+                    type="button"
+                    className="boton boton-peligro boton-chico"
+                    onClick={() => borrar(autor)}
+                  >
+                    Borrar
+                  </button>
+                </div>
+              </li>
+            )
+          )}
+        </ul>
+      )}
+    </section>
   );
 }

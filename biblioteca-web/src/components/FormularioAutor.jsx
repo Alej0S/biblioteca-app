@@ -2,7 +2,13 @@ import { useState } from 'react';
 
 const VACIO = { nombre: '', nacionalidad: '' };
 
-export default function FormularioAutor({ inicial, alGuardar, alCancelar, textoBoton = 'Guardar', className = '' }) {
+export default function FormularioAutor({
+  inicial,
+  alGuardar,
+  alCancelar,
+  textoBoton = 'Guardar',
+  className = '',
+}) {
   const [datos, setDatos] = useState(() =>
     inicial ? { nombre: inicial.nombre, nacionalidad: inicial.nacionalidad ?? '' } : VACIO
   );
@@ -39,22 +45,38 @@ export default function FormularioAutor({ inicial, alGuardar, alCancelar, textoB
     <form onSubmit={manejarEnvio} className={`formulario ${className}`} noValidate>
       <div className="formulario-fila">
         <label className={`campo ${errorNombre ? 'campo-invalido' : ''}`}>
-          Nombre
-          <input name="nombre" value={datos.nombre} onChange={manejarCambio} maxLength={150} />
+          <span className="campo-etiqueta">Nombre</span>
+          <input
+            name="nombre"
+            value={datos.nombre}
+            onChange={manejarCambio}
+            maxLength={150}
+            placeholder="Ej. Jorge Luis Borges"
+          />
           {errorNombre && <span className="error-campo">{errorNombre}</span>}
         </label>
         <label className="campo">
-          Nacionalidad
-          <input name="nacionalidad" value={datos.nacionalidad} onChange={manejarCambio} maxLength={100} placeholder="Opcional" />
+          <span className="campo-etiqueta">Nacionalidad</span>
+          <input
+            name="nacionalidad"
+            value={datos.nacionalidad}
+            onChange={manejarCambio}
+            maxLength={100}
+            placeholder="Opcional"
+          />
         </label>
       </div>
 
       {errorServidor && <p className="error">{errorServidor}</p>}
 
       <div className="acciones">
-        <button className="boton" disabled={enviando}>{enviando ? 'Guardando…' : textoBoton}</button>
+        <button className="boton" disabled={enviando}>
+          {enviando ? 'Guardando…' : textoBoton}
+        </button>
         {alCancelar && (
-          <button type="button" className="boton boton-secundario" onClick={alCancelar}>Cancelar</button>
+          <button type="button" className="boton boton-secundario" onClick={alCancelar}>
+            Cancelar
+          </button>
         )}
       </div>
     </form>
