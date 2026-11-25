@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import authRoutes from './routes/auth.routes.js';
 import autoresRoutes from './routes/autores.routes.js';
+import librosRoutes from './routes/libros.routes.js';
 import { noEncontrado, manejarErrores } from './middlewares/manejarErrores.js';
 
 const app = express();
@@ -11,6 +12,7 @@ app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/autores', autoresRoutes);
+app.use('/api/libros', librosRoutes);
 
 app.use(noEncontrado);
 app.use(manejarErrores);
