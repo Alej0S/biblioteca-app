@@ -3,7 +3,7 @@ import * as controlador from '../controllers/libros.controller.js';
 import { requiereAutenticacion } from '../middlewares/requiereAutenticacion.js';
 
 const router = Router();
-router.use(requiereAutenticacion); // protege TODAS las rutas de libros
+router.use(requiereAutenticacion);
 
 router.get('/', controlador.listar);
 router.get('/:id', controlador.obtener);

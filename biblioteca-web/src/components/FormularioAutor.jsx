@@ -2,8 +2,6 @@ import { useState } from 'react';
 
 const VACIO = { nombre: '', nacionalidad: '' };
 
-// Sirve para crear (sin `inicial`) y para editar (con `inicial`).
-// alGuardar devuelve una promesa: si falla, se muestra el error del servidor.
 export default function FormularioAutor({ inicial, alGuardar, alCancelar, textoBoton = 'Guardar', className = '' }) {
   const [datos, setDatos] = useState(() =>
     inicial ? { nombre: inicial.nombre, nacionalidad: inicial.nacionalidad ?? '' } : VACIO
@@ -29,7 +27,7 @@ export default function FormularioAutor({ inicial, alGuardar, alCancelar, textoB
     setEnviando(true);
     try {
       await alGuardar({ nombre, nacionalidad: datos.nacionalidad.trim() });
-      if (!inicial) setDatos(VACIO); // al crear, deja el formulario listo para otro
+      if (!inicial) setDatos(VACIO);
     } catch (err) {
       setErrorServidor(err.message);
     } finally {

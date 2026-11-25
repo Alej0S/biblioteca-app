@@ -38,7 +38,7 @@ export default function Registro() {
       await registro(datos.email.trim(), datos.password);
       navigate('/libros', { replace: true });
     } catch (err) {
-      setError(err.message); // por ejemplo, 409: "Ese email ya está registrado"
+      setError(err.message);
     } finally {
       setEnviando(false);
     }

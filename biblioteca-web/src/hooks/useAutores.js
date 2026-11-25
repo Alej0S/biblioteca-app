@@ -6,7 +6,6 @@ export function useAutores() {
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
 
-  // Se carga una sola vez al montar (cargando ya arranca en true)
   useEffect(() => {
     const controlador = new AbortController();
 
@@ -23,8 +22,6 @@ export function useAutores() {
     return () => controlador.abort();
   }, []);
 
-  // Se actualiza el estado con lo que responde la API ("primero la API,
-  // después el estado"): si la API falla, la pantalla no cambia.
   async function crear(datos) {
     const nuevo = await autoresService.crear(datos);
     setAutores((actuales) =>

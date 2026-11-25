@@ -1,7 +1,5 @@
 import { pool } from '../config/db.js';
 
-// Cada consulta filtra por usuario_id: un usuario solo ve y toca sus autores.
-// cantidad_libros se calcula con una subconsulta sobre la tabla relacionada.
 const COLUMNAS = `
   a.id, a.nombre, a.nacionalidad, a.creado_en,
   (SELECT COUNT(*) FROM libros l WHERE l.autor_id = a.id) AS cantidad_libros`;

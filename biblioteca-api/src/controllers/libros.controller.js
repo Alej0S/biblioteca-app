@@ -30,8 +30,6 @@ function leerId(req, res) {
   return id;
 }
 
-// El autor tiene que existir y ser del mismo usuario: si no, la FK fallaría
-// (o peor, el libro quedaría asociado al autor de otra persona).
 async function autorEsDelUsuario(autorId, usuarioId) {
   return (await Autores.obtenerPorId(autorId, usuarioId)) !== null;
 }
@@ -90,7 +88,6 @@ export async function actualizar(req, res, next) {
     const { datos, error } = validar(req.body ?? {});
     if (error) return res.status(400).json({ error });
 
-    // Primero se comprueba que el libro sea del usuario (404), después el autor (400)
     if (!(await Libros.obtenerPorId(id, req.usuario.id))) {
       return res.status(404).json({ error: 'Libro no encontrado' });
     }

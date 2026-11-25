@@ -88,8 +88,6 @@ export async function eliminar(req, res, next) {
 
     res.status(204).end();
   } catch (error) {
-    // La FK libros.autor_id tiene ON DELETE RESTRICT: MySQL no deja borrar
-    // un autor que todavía tiene libros (ver ADR-003)
     if (error.code === 'ER_ROW_IS_REFERENCED_2') {
       return res.status(409).json({ error: 'No se puede borrar: el autor tiene libros' });
     }

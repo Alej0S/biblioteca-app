@@ -2,7 +2,7 @@ import { pool } from '../config/db.js';
 
 export async function buscarPorEmail(email) {
   const [filas] = await pool.query('SELECT * FROM usuarios WHERE email = ?', [email]);
-  return filas[0]; // undefined si no existe
+  return filas[0];
 }
 
 export async function crear(email, passwordHash) {

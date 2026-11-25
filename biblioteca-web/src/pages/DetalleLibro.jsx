@@ -19,7 +19,7 @@ export default function DetalleLibro() {
       .obtener(id, controlador.signal)
       .then(setLibro)
       .catch((e) => {
-        if (e.name !== 'AbortError') setError(e.message); // 404: "Libro no encontrado"
+        if (e.name !== 'AbortError') setError(e.message);
       })
       .finally(() => {
         if (!controlador.signal.aborted) setCargando(false);

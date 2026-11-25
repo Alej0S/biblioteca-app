@@ -20,9 +20,6 @@ export async function request(ruta, { metodo = 'GET', cuerpo, signal } = {}) {
     signal,
   });
 
-  // 401 en una ruta protegida (token vencido, inválido o ausente): se cierra la
-  // sesión y se avisa a AuthContext, que redirige a /login (ver RutaProtegida).
-  // En /auth/* un 401 es "credenciales incorrectas" y no debe cerrar nada.
   if (res.status === 401 && !ruta.startsWith('/auth/')) {
     borrarToken();
     window.dispatchEvent(new Event('sesion-expirada'));

@@ -5,10 +5,6 @@ import { guardarToken, borrarToken, obtenerToken } from '../services/api';
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  // Se lee localStorage al crear el estado (de forma síncrona): al recargar la
-  // página la sesión ya está disponible antes de que RutaProtegida decida.
-  // Hay sesión solo si están el token y el usuario (si otra pestaña cerró la
-  // sesión, el token ya no está)
   const [usuario, setUsuario] = useState(() => {
     const guardado = localStorage.getItem('usuario');
     return guardado && obtenerToken() ? JSON.parse(guardado) : null;
@@ -34,8 +30,6 @@ export function AuthProvider({ children }) {
     setUsuario(null);
   }
 
-  // services/api.js borra el token y avisa con este evento cuando la API
-  // responde 401: acá se olvida al usuario y RutaProtegida manda a /login
   useEffect(() => {
     function alExpirar() {
       localStorage.removeItem('usuario');

@@ -13,7 +13,7 @@ export default function Autores() {
     try {
       await eliminar(autor.id);
     } catch (err) {
-      setErrorBorrado(err.message); // 409: "No se puede borrar: el autor tiene libros"
+      setErrorBorrado(err.message);
     }
   }
 

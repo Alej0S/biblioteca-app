@@ -14,12 +14,10 @@ export default function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        {/* Públicas */}
         <Route path="/" element={<Inicio />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
 
-        {/* Protegidas: sin sesión redirigen a /login */}
         <Route path="/libros" element={<RutaProtegida><Libros /></RutaProtegida>} />
         <Route path="/libros/nuevo" element={<RutaProtegida><NuevoLibro /></RutaProtegida>} />
         <Route path="/libros/:id" element={<RutaProtegida><DetalleLibro /></RutaProtegida>} />

@@ -3,8 +3,6 @@ import { ESTADOS } from '../datos/estados';
 
 const ANIO_ACTUAL = new Date().getFullYear();
 
-// Mismas reglas que valida la API: la validación del cliente es comodidad
-// (avisa antes de enviar); la defensa real está en el servidor.
 function validar({ titulo, autor_id, anio }) {
   const errores = {};
   if (!titulo.trim()) errores.titulo = 'El título es obligatorio';
@@ -30,7 +28,6 @@ export default function FormularioLibro({ inicial, autores, alGuardar }) {
   const [errorServidor, setErrorServidor] = useState(null);
   const [enviando, setEnviando] = useState(false);
 
-  // useRef para llevar el foco al primer campo con error (React 07)
   const refs = { titulo: useRef(null), autor_id: useRef(null), anio: useRef(null) };
 
   function manejarCambio(e) {
@@ -55,7 +52,7 @@ export default function FormularioLibro({ inicial, autores, alGuardar }) {
       await alGuardar({
         titulo: datos.titulo.trim(),
         autor_id: Number(datos.autor_id),
-        anio: datos.anio.trim() === '' ? null : Number(datos.anio), // año vacío viaja como null
+        anio: datos.anio.trim() === '' ? null : Number(datos.anio),
         estado: datos.estado,
       });
     } catch (err) {
@@ -86,8 +83,6 @@ export default function FormularioLibro({ inicial, autores, alGuardar }) {
 
         <label className={`campo ${errores.anio ? 'campo-invalido' : ''}`}>
           Año
-          {/* type="text" + inputMode numérico: con type="number" un valor a medio
-              escribir ("19e") llega como "" y el libro se guardaría sin año */}
           <input ref={refs.anio} type="text" inputMode="numeric" name="anio" value={datos.anio} onChange={manejarCambio} placeholder="Opcional" maxLength={4} />
           {errores.anio && <span className="error-campo">{errores.anio}</span>}
         </label>

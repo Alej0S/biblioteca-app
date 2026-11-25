@@ -10,8 +10,6 @@ export function useLibros() {
   useEffect(() => {
     const controlador = new AbortController();
 
-    // Debounce: mientras se escribe en el buscador se espera 400 ms antes de
-    // pedir; si cambia otra letra, la limpieza cancela el pedido pendiente.
     const demora = filtros.buscar ? 400 : 0;
     const temporizador = setTimeout(() => {
       setCargando(true);

@@ -2,14 +2,12 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useLibros } from '../hooks/useLibros';
 
-// Solo se monta con sesión: así no se pide /libros sin token
 function ResumenLibros() {
   const { libros, cargando, error } = useLibros();
 
   if (cargando) return <p className="estado-carga">Cargando resumen…</p>;
   if (error) return <p className="error">{error}</p>;
 
-  // Dato derivado: se calcula en cada render a partir de la lista (React 03)
   const contar = (estado) => libros.filter((l) => l.estado === estado).length;
   const datos = [
     { texto: 'Total', numero: libros.length },

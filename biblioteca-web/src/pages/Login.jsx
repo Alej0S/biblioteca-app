@@ -10,7 +10,6 @@ export default function Login() {
   const [error, setError] = useState(null);
   const [enviando, setEnviando] = useState(false);
 
-  // Si llegó redirigido por RutaProtegida, vuelve a la página que pidió
   const destino = location.state?.desde?.pathname || '/libros';
 
   function manejarCambio(e) {

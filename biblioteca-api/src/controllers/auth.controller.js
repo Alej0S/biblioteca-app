@@ -49,8 +49,6 @@ export async function login(req, res, next) {
     const coincide =
       registrado && (await bcrypt.compare(String(password ?? ''), registrado.password_hash));
 
-    // Mismo 401 si el email no existe o si la contraseña no coincide:
-    // no se le dice a quien consulta cuál de las dos cosas falló.
     if (!coincide) {
       return res.status(401).json({ error: 'Email o contraseña incorrectos' });
     }

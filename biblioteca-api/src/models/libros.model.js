@@ -1,7 +1,5 @@
 import { pool } from '../config/db.js';
 
-// JOIN con autores para devolver también el nombre del autor de cada libro.
-// Todas las consultas filtran por l.usuario_id: un usuario solo ve sus libros.
 const COLUMNAS = `
   l.id, l.titulo, l.anio, l.estado, l.autor_id, a.nombre AS autor_nombre, l.creado_en`;
 const DESDE = 'FROM libros l JOIN autores a ON a.id = l.autor_id';

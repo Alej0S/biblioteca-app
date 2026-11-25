@@ -1,13 +1,3 @@
--- =====================================================================
--- Biblioteca personal — esquema de la base de datos
--- Ejecutar como root:   mysql -u root -p < database/schema.sql
--- (en XAMPP sin clave de root:  mysql -u root < database/schema.sql)
---
--- ATENCIÓN: borra y vuelve a crear las tablas. Se pierden los datos.
--- =====================================================================
-
--- Este archivo está en UTF-8: así los acentos de los datos de ejemplo se
--- guardan bien aunque el cliente mysql use otro juego de caracteres
 SET NAMES utf8mb4;
 
 CREATE DATABASE IF NOT EXISTS biblioteca
@@ -15,14 +5,10 @@ CREATE DATABASE IF NOT EXISTS biblioteca
 
 USE biblioteca;
 
--- Se borran en orden inverso a las dependencias (primero las que tienen FK)
 DROP TABLE IF EXISTS libros;
 DROP TABLE IF EXISTS autores;
 DROP TABLE IF EXISTS usuarios;
 
--- ---------------------------------------------------------------------
--- usuarios: cada persona que se registra en la app
--- ---------------------------------------------------------------------
 CREATE TABLE usuarios (
   id INT AUTO_INCREMENT PRIMARY KEY,
   email VARCHAR(150) NOT NULL UNIQUE,
@@ -30,9 +16,6 @@ CREATE TABLE usuarios (
   creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- ---------------------------------------------------------------------
--- autores: pertenecen a un usuario. Un usuario no repite nombres.
--- ---------------------------------------------------------------------
 CREATE TABLE autores (
   id INT AUTO_INCREMENT PRIMARY KEY,
   usuario_id INT NOT NULL,
@@ -44,10 +27,6 @@ CREATE TABLE autores (
     REFERENCES usuarios (id) ON DELETE CASCADE
 );
 
--- ---------------------------------------------------------------------
--- libros: pertenecen a un usuario y a un autor (relación 1:N con autores).
--- ON DELETE RESTRICT: no se puede borrar un autor que tiene libros.
--- ---------------------------------------------------------------------
 CREATE TABLE libros (
   id INT AUTO_INCREMENT PRIMARY KEY,
   usuario_id INT NOT NULL,
@@ -62,16 +41,9 @@ CREATE TABLE libros (
     REFERENCES autores (id) ON DELETE RESTRICT
 );
 
--- ---------------------------------------------------------------------
--- Usuario de la aplicación: solo puede leer y escribir datos, no cambiar
--- la estructura. Cambiar la clave y usar la misma en DB_PASSWORD del .env
--- ---------------------------------------------------------------------
 CREATE USER IF NOT EXISTS 'biblioteca_app'@'localhost' IDENTIFIED BY 'una-clave-segura';
 GRANT SELECT, INSERT, UPDATE, DELETE ON biblioteca.* TO 'biblioteca_app'@'localhost';
 
--- ---------------------------------------------------------------------
--- Datos de ejemplo: usuario demo@biblioteca.com / contraseña demo123
--- ---------------------------------------------------------------------
 INSERT INTO usuarios (id, email, password_hash) VALUES
   (1, 'demo@biblioteca.com', '$2b$10$9CERpUExcqO5H2.O9DgAKOVbHIfimMsxVX98pCVNyt9X8FBJ5UnBC');
 

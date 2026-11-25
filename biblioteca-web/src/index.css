@@ -1,5 +1,3 @@
-/* Biblioteca personal — estilos globales (simples, sin librerías) */
-
 :root {
   --papel: #f7f3ea;
   --tarjeta: #ffffff;
@@ -25,7 +23,6 @@ body { margin: 0; }
 h1, h2, h3 { line-height: 1.2; margin: 0 0 0.75rem; }
 a { color: var(--acento); }
 
-/* ── Barra superior ───────────────────────────── */
 .barra {
   display: flex;
   align-items: center;
@@ -42,7 +39,6 @@ a { color: var(--acento); }
 .barra a.active { color: #fff; border-bottom-color: #fff; }
 .barra .usuario { font-size: 0.9rem; opacity: 0.9; }
 
-/* ── Contenido ────────────────────────────────── */
 .contenedor { max-width: 960px; margin: 2rem auto; padding: 0 1rem; }
 
 .tarjeta {
@@ -66,7 +62,6 @@ a { color: var(--acento); }
 
 .acciones { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
 
-/* ── Botones ──────────────────────────────────── */
 .boton {
   display: inline-block;
   border: none;
@@ -87,7 +82,6 @@ a { color: var(--acento); }
 .boton-peligro:hover { background: rgba(179, 38, 30, 0.08); }
 .boton-chico { padding: 0.3rem 0.7rem; font-size: 0.9rem; }
 
-/* ── Formularios ──────────────────────────────── */
 .formulario { display: grid; gap: 1rem; }
 .formulario-fila { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
 .campo { display: grid; gap: 0.3rem; font-weight: 500; align-content: start; }
@@ -115,11 +109,9 @@ a { color: var(--acento); }
 }
 .aviso { background: #fff8e1; border-radius: 8px; padding: 0.75rem 1rem; }
 
-/* ── Filtros ──────────────────────────────────── */
 .filtros { display: grid; gap: 0.75rem; grid-template-columns: 2fr 1fr 1fr; margin-bottom: 1rem; }
 @media (max-width: 640px) { .filtros { grid-template-columns: 1fr; } }
 
-/* ── Listas ───────────────────────────────────── */
 .lista { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.5rem; }
 .item {
   display: flex;
@@ -138,7 +130,6 @@ a { color: var(--acento); }
 
 .estado-carga, .vacio { color: var(--tinta-suave); text-align: center; padding: 1.5rem; }
 
-/* ── Insignias de estado ──────────────────────── */
 .insignia {
   display: inline-block;
   font-size: 0.8rem;
@@ -151,7 +142,6 @@ a { color: var(--acento); }
 .insignia-pendiente { color: var(--pendiente); background: #fff4e0; }
 .insignia-prestado { color: var(--prestado); background: #e8eaf6; }
 
-/* ── Resumen (Inicio) ─────────────────────────── */
 .resumen { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin: 1rem 0; }
 .resumen-dato { border: 1px solid var(--borde); border-radius: var(--radio); padding: 1rem; text-align: center; background: #fffdf8; }
 .resumen-numero { display: block; font-size: 2rem; font-weight: 700; }
